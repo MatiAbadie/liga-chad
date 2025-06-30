@@ -7,14 +7,14 @@ import java.util.List;
 
 public class EquipoService {
 
-    // Transferir jugador entre equipos
+    //transferir jugador entre equipos
     public void transferirJugador(Jugador jugador, Equipo origen, Equipo destino) {
         origen.eliminarJugador(jugador);
         destino.agregarJugador(jugador);
         System.out.println("Jugador transferido: " + jugador.getNombre());
     }
 
-    // Calcular promedio de goles del equipo
+    //calcular promedio de goles del equipo
     public double promedioGoles(Equipo equipo) {
         List<Jugador> jugadores = equipo.getJugadores();
         if (jugadores.isEmpty()) return 0;
@@ -23,7 +23,7 @@ public class EquipoService {
         return (double) total / jugadores.size();
     }
 
-    // Mostrar jugadores sin goles
+    //mostrar jugadores sin goles
     public void mostrarJugadoresSinGoles(Equipo equipo) {
         for (Jugador j : equipo.getJugadores()) {
             if (j.getGoles() == 0) {
