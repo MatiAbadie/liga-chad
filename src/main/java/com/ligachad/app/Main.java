@@ -3,6 +3,7 @@ package com.ligachad.app;
 import com.ligachad.domain.*;
 import com.ligachad.service.*;
 import java.util.*;
+import com.ligachad.utils.CsvUtils;
 
 public class Main {
 
@@ -23,6 +24,7 @@ public class Main {
             scanner.nextLine(); // limpiar buffer
 
 
+
             switch (opcion) {
                 case 1 -> registrarJugador();
                 case 2 -> crearEquipo();
@@ -33,7 +35,7 @@ public class Main {
 
 
                 case 0 -> System.out.println("¡Saliendo del sistema!");
-                System.out.println("6. Exportar jugadores de un equipo a CSV");
+
 
                 default -> System.out.println("Opción inválida");
             }
@@ -48,6 +50,8 @@ public class Main {
         System.out.println("3. Registrar partido y asignar goles");
         System.out.println("4. Mostrar goleador de la liga");
         System.out.println("5. Listar todos los jugadores");
+        System.out.println("6. Exportar jugadores de un equipo a CSV");
+
         System.out.println("0. Salir");
         System.out.print("Elegí una opción: ");
     }
@@ -142,6 +146,22 @@ public class Main {
                 j -> System.out.println("Goleador: " + j.getNombre() + " (" + j.getGoles() + " goles)"),
                 () -> System.out.println("No hay goles registrados aún.")
         );
+    }
+
+    public static void exportarCsvEquipo() {
+        if (equipos.isEmpty()) {
+            System.out.println("No hay equipos para exportar.");
+            return;
+        }
+
+        System.out.println("Seleccioná el equipo a exportar:");
+        for (int i = 0; i < equipos.size(); i++) {
+            System.out.println((i + 1) + ". " + equipos.get(i).getNombre());
+        }
+        int idx = scanner.nextInt() - 1;
+        scanner.nextLine();
+
+        CsvUtils.exportarJugadores(equipos.get(idx));
     }
 
     public static void listarTodosLosJugadores() {
